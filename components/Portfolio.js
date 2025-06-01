@@ -34,17 +34,19 @@ export default function Portfolio() {
   }
 
   return (
-    <section id="portfolio" className="py-12">
-      <h2 className="text-5xl font-punk text-center mb-8">My Work</h2>
+    <section id="portfolio" className="py-12 bg-black">
+      <h2 className="text-5xl font-punk text-center mb-8 text-white">My Work</h2>
 
       <div className="max-w-5xl mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {projects.map((project) => (
             <motion.div
               key={project.id}
-              className="cursor-pointer aspect-square relative overflow-hidden rounded-lg group outline-none"
+              className="cursor-pointer aspect-square relative overflow-hidden rounded-lg group outline-none border-2 border-transparent focus:border-white focus:ring-4 focus:ring-white/30 transition"
               tabIndex={0}
+              role="button"
               aria-label={`Open project: ${project.title}`}
+              aria-pressed={selected && selected.id === project.id}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => setSelected(project)}
@@ -56,8 +58,8 @@ export default function Portfolio() {
                 loading="lazy"
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold">
-                {project.title}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
+                <span className="text-white font-bold text-lg drop-shadow-lg">{project.title}</span>
               </div>
             </motion.div>
           ))}

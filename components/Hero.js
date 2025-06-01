@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import GlitchText from './GlitchText'
 
 function Hero() {
   const controls = useAnimation()
@@ -54,12 +55,10 @@ function Hero() {
           transition={{ duration: 1 }}
         >
           <span className="block">Hello, I'm</span>
-          <span 
-            className="block text-white glitch-text mt-2 drop-shadow-[0_2px_16px_rgba(255,255,255,0.25)]" 
-            data-text="Ramones Capulong"
-          >
-            Ramones Capulong
-          </span>
+          <GlitchText 
+            text="Ramones Capulong"
+            className="block mt-2 drop-shadow-[0_2px_16px_rgba(255,255,255,0.25)]"
+          />
         </motion.h1>
 
         <motion.p
