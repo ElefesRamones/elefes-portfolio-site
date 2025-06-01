@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
 
 /* Custom Properties & Theming */
 :root {
@@ -40,6 +43,7 @@ html {
   -webkit-text-size-adjust: 100%;
   overflow-y: auto;
   scrollbar-gutter: stable;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
 body {
@@ -64,16 +68,16 @@ img, picture, video, canvas, svg {
 
 /* Typography Enhancements */
 @font-face {
-  font-family: 'Punk';
+  font-family: 'punkf';
   src: url('/fonts/punkf.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-.font-punk {
-  font-family: 'Punk', sans-serif;
-  letter-spacing: -0.025em;
+.heading-punk {
+  font-family: 'punkf', sans-serif;
+  letter-spacing: 0.05em;
 }
 
 /* Enhanced Scrollbar */
