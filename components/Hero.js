@@ -26,7 +26,7 @@ export default function Hero() {
         animate={controls}
         transition={{ duration: 1 }}
       >
-        Hello, I'm Elefes
+        Hello, I'm Ramones Capulong
       </motion.h1>
       <motion.p
         className="text-lg sm:text-xl text-punk-peach max-w-xl"
