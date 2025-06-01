@@ -10,45 +10,133 @@
   src: url('/fonts/punkf.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Readable font for body */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   @apply bg-black text-white font-sans;
   font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
-/* Apply PunkFont to headers only */
+/* Apply punk font to headers only */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'PunkFont', sans-serif;
+  font-family: 'punkf', sans-serif;
+  font-weight: normal;
 }
-/* Scrollbar Styles for WebKit Browsers (Chrome, Edge, Safari) */
-/* Custom Scrollbar */
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Focus styles for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid #ffb366;
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar for WebKit Browsers */
 ::-webkit-scrollbar {
   width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000; /* Black track */
+  background: #000;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ffffff, #ebb00f); /* Orange to peach gradient */
+  background: linear-gradient(180deg, #ffffff, #ffb366);
   border-radius: 10px;
-  box-shadow: 0 0 8px rgba(255, 165, 0, 0.7);
+  box-shadow: 0 0 8px rgba(255, 179, 102, 0.7);
   transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  box-shadow: 0 0 12px rgba(255, 165, 0, 1), 0 0 20px rgba(255, 204, 153, 0.9);
+  box-shadow: 0 0 12px rgba(255, 179, 102, 1), 0 0 20px rgba(255, 204, 153, 0.9);
   transform: scaleY(1.1);
 }
 
-/* Firefox Support */
+/* Firefox scrollbar support */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #ffa500 #000;
+  scrollbar-color: #ffb366 #000;
+}
+
+/* Glitch animation keyframes */
+@keyframes glitchTop {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-2px, -2px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes glitchBottom {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(2px, 2px); }
+  40% { transform: translate(-2px, 1px); }
+  60% { transform: translate(1px, -1px); }
+  80% { transform: translate(-1px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Utility classes */
+.glitch-text {
+  position: relative;
+  color: white;
+  display: inline-block;
+  font-weight: bold;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.glitch-text::before {
+  color: #ff00c8;
+  z-index: -1;
+  animation: glitchTop 0.7s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  color: #00fff9;
+  z-index: -2;
+  animation: glitchBottom 0.7s infinite linear alternate-reverse;
+}
+
+/* Loading animation */
+.loading-skeleton {
+  background: linear-gradient(90deg, #1a1a1a 25%, #333 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
