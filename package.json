@@ -1,0 +1,22 @@
+{
+  "name": "elefes-portfolio",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "framer-motion": "^10.18.0",
+    "next": "14.1.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1"
+  }
+}

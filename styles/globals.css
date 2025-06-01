@@ -1,0 +1,54 @@
+/* globals.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Punk font for headers */
+@font-face {
+  font-family: 'punkf';
+  src: url('/fonts/punkf.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Readable font for body */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  @apply bg-black text-white font-sans;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Apply PunkFont to headers only */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'PunkFont', sans-serif;
+}
+/* Scrollbar Styles for WebKit Browsers (Chrome, Edge, Safari) */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000; /* Black track */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffffff, #ebb00f); /* Orange to peach gradient */
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.7);
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: 0 0 12px rgba(255, 165, 0, 1), 0 0 20px rgba(255, 204, 153, 0.9);
+  transform: scaleY(1.1);
+}
+
+/* Firefox Support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #ffa500 #000;
+}
