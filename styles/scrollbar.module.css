@@ -1,0 +1,26 @@
+/* Custom Scrollbar */
+:global(::-webkit-scrollbar) {
+  width: 10px;
+}
+
+:global(::-webkit-scrollbar-track) {
+  background: #000000;
+  border-radius: 5px;
+}
+
+:global(::-webkit-scrollbar-thumb) {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  border: 2px solid #000000;
+  transition: background 0.2s ease;
+}
+
+:global(::-webkit-scrollbar-thumb:hover) {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Firefox */
+:global(*) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) #000000;
+}

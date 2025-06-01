@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import GlitchText from './GlitchText'
+import styles from './GlitchText.module.css'
 
 function Hero() {
   const controls = useAnimation()
@@ -67,10 +68,8 @@ function Hero() {
           animate={controls}
           transition={{ duration: 1, delay: 0.3 }}
         >
-          Your friendly neighbourhood{' '}
-          <span className="text-black font-bold drop-shadow-[0_1px_8px_rgba(0,0,0,0.15)]">Design-Man</span>
+          <span className={styles.designGlitch} data-text="Design-Man">Your friendly neighbourhood Design-Man</span>
         </motion.p>
-
         <motion.div
           className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center"
           initial={{ opacity: 0, y: 20 }}
