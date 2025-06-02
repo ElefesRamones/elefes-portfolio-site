@@ -9,14 +9,12 @@ export default function Services() {
           <FaPencilRuler className="text-5xl text-black mb-4 mx-auto" />
           <h3 className="text-xl font-pen mb-2">
             Graphic Design
-          </h3>
-          <p className="text-black/80">Posters, flyers, album covers, and more with your vibe in mind.</p>
+          </h3>          <p className="text-black/80">Posters, flyers, album covers, and more with your vibe in mind.</p>
         </div>        {/* VIDEO EDITING SERVICE */}
         <div className="p-6">          <FaVideo className="text-5xl text-black mb-4 mx-auto" />
           <h3 className="text-xl font-pen mb-2">
             Video Editing
-          </h3>
-          <p className="text-black/80">Stylized reels, highlight cuts, or promos that hit hard.</p>
+          </h3>          <p className="text-black/80">Stylized reels, highlight cuts, or promos that hit hard.</p>
         </div>
 
         {/* SOCIAL MEDIA SERVICE */}
@@ -24,8 +22,7 @@ export default function Services() {
           <FaInstagram className="text-5xl text-black mb-4 mx-auto" />
           <h3 className="text-xl font-pen mb-2">
             Social Media
-          </h3>
-          <p className="text-black/80">Templates, strategy, and post designs that grab attention.</p>
+          </h3>          <p className="text-black/80">Templates, strategy, and post designs that grab attention.</p>
         </div>
       </div>
     </section>

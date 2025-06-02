@@ -89,11 +89,9 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
         ref={popupRef}
         className="bg-white text-black rounded-lg max-w-7xl w-full flex flex-col md:flex-row relative p-4 gap-6 outline-none shadow-xl"
         onClick={e => e.stopPropagation()}
-      >
-        {/* Left side - description */}
-        <div className="md:w-5/12 p-4">
-          <h2 className="text-3xl font-punk mb-4">{project.title}</h2>
-          <p className="text-gray-600">{project.description}</p>
+      >        {/* Left side - description */}
+        <div className="md:w-5/12 p-4">          <h2 className="text-3xl font-pen mb-4">{project.title}</h2>
+          <p className="text-black/80">{project.description}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {project.tags?.map(tag => (
               <span

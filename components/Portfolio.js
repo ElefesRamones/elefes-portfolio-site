@@ -41,7 +41,7 @@ export default function Portfolio() {
           {projects.map((project) => (
             <motion.div
               key={project.id}
-              className="cursor-pointer aspect-[4/3] relative overflow-hidden rounded-lg group outline-none border-2 border-transparent focus:border-black focus:ring-4 focus:ring-black/30 transition shadow-lg"
+              className="cursor-pointer aspect-[4/3] relative overflow-hidden group outline-none focus:outline-none transition"
               tabIndex={0}
               role="button"
               aria-label={`Open project: ${project.title}`}
@@ -58,7 +58,7 @@ export default function Portfolio() {
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
-                <span className="text-black font-bold text-lg drop-shadow-lg">{project.title}</span>
+                <span className="font-bold text-white text-lg drop-shadow-lg">{project.title}</span>
               </div>
             </motion.div>
           ))}

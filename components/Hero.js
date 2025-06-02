@@ -50,7 +50,7 @@ function Hero() {
           </motion.h1>
 
           <motion.p
-            className="text-base xs:text-lg sm:text-xl md:text-2xl text-black font-light leading-relaxed max-w-[90vw] sm:max-w-xl md:max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.15)]"
+            className="text-base xs:text-lg sm:text-xl md:text-2xl text-black leading-relaxed max-w-[90vw] sm:max-w-xl md:max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.15)]"
             animate={controls}
           >
             <span className={styles.designGlitch} data-text="Design-Man">

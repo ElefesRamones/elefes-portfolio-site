@@ -53,13 +53,14 @@ html {
   overflow-y: auto;
   scrollbar-gutter: stable;
   font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 300;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 
-    Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 300;
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -177,6 +178,7 @@ img, picture, video, canvas, svg {
 /* Utility Classes */
 .text-gradient {
   background: linear-gradient(to right, var(--accent), var(--accent-2));
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
