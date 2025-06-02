@@ -5,7 +5,8 @@
   right: 0;
   bottom: 0;
   width: 100vw;
-  height: 100vh;  z-index: -1;
+  height: 100vh;
+  z-index: -1;
   background-color: #ffffff;
   overflow: hidden;
 }
@@ -14,12 +15,10 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  min-width: 100vw;
-  min-height: 100vh;
-  width: auto;
-  height: auto;
-  filter: blur(70px);
+  transform: translate(-50%, -50%) scale(1.2);
+  width: 150vw;
+  height: 150vh;
+  filter: blur(65px);
 }
 
 .overlay {

@@ -10,46 +10,67 @@ const SmokeBackground = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d', { alpha: false });
     let particles = [];
-    let animationFrameId;      const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      // Ensure white background on resize
+    let animationFrameId;
+    let frame = 0;
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth * 1.5; // Make canvas bigger than viewport
+      canvas.height = window.innerHeight * 1.5;
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
     class Particle {
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 200 + 100; // Larger particles
-        this.speedX = Math.random() * 0.3 - 0.15; // Slower movement
-        this.speedY = Math.random() * 0.3 - 0.15; // Slower movement
-        this.life = Math.random() * 0.4 + 0.6; // More consistent opacity
-        this.alpha = Math.random() * 0.3 + 0.1; // Variable transparency
+        // Random position along a wider area
+        const spawnWidth = canvas.width * 1.5;
+        const spawnOffset = -canvas.width * 0.25;
+        this.x = Math.random() * spawnWidth + spawnOffset;
+        this.y = canvas.height;
+        
+        // Varied sizes and speeds
+        this.size = Math.random() * 250 + 150;
+        this.speedY = -Math.random() * 2 - 1.5; // Faster upward movement
+        this.speedX = (Math.random() - 0.5) * 2; // More horizontal drift
+        
+        // Movement patterns
+        this.angle = Math.random() * Math.PI * 2;
+        this.angleSpeed = (Math.random() - 0.5) * 0.002;
+        this.curve = Math.random() * 100 - 50;
+        
+        // Visual properties
+        this.life = 1;
+        this.opacity = Math.random() * 0.3 + 0.15;
+        this.decay = 0.003 + Math.random() * 0.002;
       }
 
       update() {
-        this.x += this.speedX;
+        // Update position with curved movement
         this.y += this.speedY;
-        this.life -= 0.002; // Slower fade
-
-        // Wrap around edges smoothly
-        if (this.x < -this.size) this.x = canvas.width + this.size;
-        if (this.x > canvas.width + this.size) this.x = -this.size;
-        if (this.y < -this.size) this.y = canvas.height + this.size;
-        if (this.y > canvas.height + this.size) this.y = -this.size;
+        this.x += this.speedX;
+        this.angle += this.angleSpeed;
+        this.x += Math.sin(this.angle) * this.curve * 0.01;
+        
+        // Fade out based on position and life
+        this.life -= this.decay;
+        
+        // Keep particle if it's still visible
+        return this.life > 0;
       }
 
       draw() {
-        ctx.beginPath();
+        const alpha = this.opacity * this.life;
         const gradient = ctx.createRadialGradient(
           this.x, this.y, 0,
           this.x, this.y, this.size
-        );        const alpha = this.alpha * this.life;
+        );
+        
         gradient.addColorStop(0, `rgba(0, 0, 0, ${alpha})`);
-        gradient.addColorStop(0.6, `rgba(0, 0, 0, ${alpha * 0.3})`);
+        gradient.addColorStop(0.4, `rgba(0, 0, 0, ${alpha * 0.6})`);
+        gradient.addColorStop(0.7, `rgba(0, 0, 0, ${alpha * 0.2})`);
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        
+        ctx.beginPath();
         ctx.fillStyle = gradient;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -58,32 +79,33 @@ const SmokeBackground = () => {
 
     const init = () => {
       particles = [];
-      for (let i = 0; i < 20; i++) {
+      // Start with more particles
+      for (let i = 0; i < 15; i++) {
         particles.push(new Particle());
       }
     };
 
-    const animate = () => {      // Clear with solid white
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const animate = () => {
+      frame++;
       
-      // Add slight fade for trails
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
+      // Smoother fade
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.97)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach((particle, index) => {
-        particle.update();
-        particle.draw();
-        
-        if (particle.life <= 0) {
-          particles[index] = new Particle();
-        }
-      });
+      // Update particles
+      particles = particles.filter(particle => particle.update());
+      
+      // Add new particles randomly
+      if (frame % 2 === 0 && particles.length < 20) {
+        particles.push(new Particle());
+      }
+
+      // Draw all particles
+      particles.forEach(particle => particle.draw());
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    // Initial setup
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     init();
