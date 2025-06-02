@@ -21,27 +21,23 @@ export default function About() {
   return (
     <section id="about" className="relative overflow-hidden py-20">
       {/* Content */}
-      <motion.div
-        variants={containerVariants}
+      <motion.div        variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, margin: "-100px", amount: 0.3 }}
         className="relative z-10 container mx-auto px-4 lg:px-6 flex items-center justify-center"
       >
         <div className="max-w-2xl mx-auto space-y-12 text-center">
-          {/* Header */}          <motion.div variants={itemVariants} className="space-y-4">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-punk text-white tracking-wider">
+          {/* Header */}          <motion.div variants={itemVariants} className="space-y-4">            <h2 className="text-4xl md:text-5xl lg:text-6xl font-punk text-black tracking-wider">
               ABOUT ME
             </h2>
-            <div className="h-px w-full bg-gradient-to-r from-transparent via-white to-transparent opacity-20" />
-          </motion.div>
-
-          {/* Content */}
+            <div className="h-px w-full bg-gradient-to-r from-transparent via-black to-transparent opacity-20" />
+          </motion.div>          {/* Content */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <p className="text-xl md:text-2xl text-white font-light leading-relaxed">
+            <p className="text-xl md:text-2xl text-black font-pen leading-relaxed">
               Aspiring graphic designer and video editor with a passion for creating compelling visual narratives.
             </p>
-            <p className="text-base md:text-lg text-white/80 leading-relaxed">
+            <p className="text-base md:text-lg text-black/80 leading-relaxed">
               I blend creative vision with technical expertise to craft designs that captivate and communicate. Currently exploring the intersection of traditional design principles and contemporary digital aesthetics.
             </p>
           </motion.div>

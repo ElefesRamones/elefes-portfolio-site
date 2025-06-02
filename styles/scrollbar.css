@@ -4,20 +4,20 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #FFFFFF;
+  background: #000000;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFFFFF;
+  background: #000000;
 }
 
 /* Firefox Support */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #FFFFFF #000000;
+  scrollbar-color: #000000 #FFFFFF;
 }

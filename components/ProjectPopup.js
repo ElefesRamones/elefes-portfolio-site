@@ -79,7 +79,7 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center px-6"
+      className="fixed inset-0 bg-white bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center px-6"
       aria-modal="true"
       role="dialog"
       tabIndex={-1}
@@ -87,18 +87,18 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
     >
       <div
         ref={popupRef}
-        className="bg-black text-white rounded-lg max-w-7xl w-full flex flex-col md:flex-row relative p-4 gap-6 outline-none"
+        className="bg-white text-black rounded-lg max-w-7xl w-full flex flex-col md:flex-row relative p-4 gap-6 outline-none shadow-xl"
         onClick={e => e.stopPropagation()}
       >
         {/* Left side - description */}
         <div className="md:w-5/12 p-4">
           <h2 className="text-3xl font-punk mb-4">{project.title}</h2>
-          <p className="text-gray-200">{project.description}</p>
+          <p className="text-gray-600">{project.description}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {project.tags?.map(tag => (
               <span
                 key={tag}
-                className="bg-black border border-white/30 text-white px-3 py-1 rounded-full text-xs font-medium"
+                className="bg-white border border-black/30 text-black px-3 py-1 rounded-full text-xs font-medium"
               >
                 {tag}
               </span>
@@ -113,13 +113,13 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
             <button
               onClick={() => paginate(-1)}
               aria-label="Previous media"
-              className="z-40 bg-black text-white rounded-full p-2 hover:bg-white hover:text-black border border-white transition mr-4 focus:ring-2 focus:ring-white"
+              className="z-40 bg-white text-black rounded-full p-2 hover:bg-black hover:text-white border border-black transition mr-4 focus:ring-2 focus:ring-black"
             >
               <FaChevronLeft />
             </button>
 
             {/* Media Viewer */}
-            <div className="relative w-[min(90vw,720px)] h-[min(90vw,720px)] rounded-lg border-2 border-white overflow-hidden z-30 bg-black">
+            <div className="relative w-[min(90vw,720px)] h-[min(90vw,720px)] rounded-lg border-2 border-black overflow-hidden z-30 bg-white">
               <AnimatePresence custom={direction} mode="wait">
                 <motion.div
                   key={currentMediaIndex}
@@ -138,50 +138,25 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
                   )}
                 </motion.div>
               </AnimatePresence>
-
-              {/* Close Button */}
-              <button
-                onClick={onClose}
-                aria-label="Close"
-                className="absolute top-2 right-2 text-white text-2xl hover:text-black hover:bg-white rounded-full transition z-50 focus:ring-2 focus:ring-white"
-              >
-                ✕
-              </button>
             </div>
 
             {/* Right Arrow */}
             <button
               onClick={() => paginate(1)}
               aria-label="Next media"
-              className="z-40 bg-black text-white rounded-full p-2 hover:bg-white hover:text-black border border-white transition ml-4 focus:ring-2 focus:ring-white"
+              className="z-40 bg-white text-black rounded-full p-2 hover:bg-black hover:text-white border border-black transition ml-4 focus:ring-2 focus:ring-black"
             >
               <FaChevronRight />
             </button>
-          </div>
 
-          {/* Deck Preview */}
-          <div className="flex gap-2 mt-6 z-10 flex-wrap justify-center">
-            {project.media.map((item, i) => {
-              if (i === currentMediaIndex) return null
-              return (
-                <button
-                  key={i}
-                  className="w-[100px] h-[100px] rounded-lg overflow-hidden border-2 border-white opacity-50 hover:opacity-80 transition cursor-pointer focus:ring-2 focus:ring-white"
-                  onClick={() => {
-                    const dir = i > currentMediaIndex ? 1 : -1
-                    setDirection(dir)
-                    setCurrentMediaIndex(i)
-                  }}
-                  aria-label={`Show media ${i + 1}`}
-                >
-                  {item.endsWith('.mp4') ? (
-                    <video src={item} muted loop className="w-full h-full object-contain" />
-                  ) : (
-                    <img src={item} alt="" className="w-full h-full object-contain" loading="lazy" />
-                  )}
-                </button>
-              )
-            })}
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              aria-label="Close"
+              className="absolute top-2 right-2 text-black text-2xl hover:text-white hover:bg-black rounded-full transition z-50 focus:ring-2 focus:ring-black"
+            >
+              ✕
+            </button>
           </div>
         </div>
       </div>

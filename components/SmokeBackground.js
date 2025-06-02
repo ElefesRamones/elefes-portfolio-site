@@ -10,13 +10,11 @@ const SmokeBackground = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d', { alpha: false });
     let particles = [];
-    let animationFrameId;
-
-    const resizeCanvas = () => {
+    let animationFrameId;      const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // Ensure black background on resize
-      ctx.fillStyle = '#000000';
+      // Ensure white background on resize
+      ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     };
 
@@ -48,11 +46,10 @@ const SmokeBackground = () => {
         const gradient = ctx.createRadialGradient(
           this.x, this.y, 0,
           this.x, this.y, this.size
-        );
-        const alpha = this.alpha * this.life;
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
-        gradient.addColorStop(0.6, `rgba(255, 255, 255, ${alpha * 0.3})`);
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        );        const alpha = this.alpha * this.life;
+        gradient.addColorStop(0, `rgba(0, 0, 0, ${alpha})`);
+        gradient.addColorStop(0.6, `rgba(0, 0, 0, ${alpha * 0.3})`);
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = gradient;
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -66,13 +63,12 @@ const SmokeBackground = () => {
       }
     };
 
-    const animate = () => {
-      // Clear with solid black
-      ctx.fillStyle = '#000000';
+    const animate = () => {      // Clear with solid white
+      ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       // Add slight fade for trails
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.92)';
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.92)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, index) => {
