@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         punk: ['punkf', 'sans-serif'],
+        pen: ['Pen', 'cursive'],
         sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },

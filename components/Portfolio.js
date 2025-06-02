@@ -32,16 +32,13 @@ export default function Portfolio() {
       setSelected(project)
     }
   }
-  return (
-    <section id="portfolio" className="py-12">
-      <h2 className="text-5xl font-punk text-center mb-8 text-white">My Work</h2>
-
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  return (    <section id="portfolio" className="py-20">
+      <h2 className="text-5xl font-punk text-center mb-16 text-white">My Work</h2><div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
           {projects.map((project) => (
             <motion.div
               key={project.id}
-              className="cursor-pointer aspect-square relative overflow-hidden rounded-lg group outline-none border-2 border-transparent focus:border-white focus:ring-4 focus:ring-white/30 transition"
+              className="cursor-pointer aspect-[4/3] relative overflow-hidden rounded-lg group outline-none border-2 border-transparent focus:border-white focus:ring-4 focus:ring-white/30 transition shadow-lg"
               tabIndex={0}
               role="button"
               aria-label={`Open project: ${project.title}`}

@@ -5,6 +5,15 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
 
+/* Font Faces */
+@font-face {
+  font-family: 'Pen';
+  src: url('/fonts/Pen.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Custom Properties & Theming */
 :root {
   /* Base Colors */
