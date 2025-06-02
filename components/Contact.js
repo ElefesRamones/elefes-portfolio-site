@@ -8,18 +8,7 @@ export default function Contact() {
     window.location.href = 'mailto:Elefesramones51@gmail.com';
   };
 
-  return (
-    <section id="contact" className="py-20 px-6 bg-black text-white relative overflow-hidden">
-      <motion.div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 bg-white opacity-10 rounded-full blur-3xl pointer-events-none"
-        animate={{ scale: [1, 1.15, 1], y: [0, 30, 0] }}
-        transition={{ duration: 10, repeat: Infinity, repeatType: "mirror" }}
-      />
-      <motion.div
-        className="absolute bottom-0 right-0 w-60 h-60 bg-white opacity-5 rounded-full blur-2xl pointer-events-none"
-        animate={{ scale: [1, 1.1, 1], x: [0, -20, 0] }}
-        transition={{ duration: 8, repeat: Infinity, repeatType: "mirror", delay: 2 }}
-      />
+  return (    <section id="contact" className="py-20 px-6 text-white relative overflow-hidden">
 
       <div className="max-w-xl mx-auto relative z-10">
         <motion.h2

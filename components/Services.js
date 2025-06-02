@@ -3,7 +3,7 @@ import { FaPencilRuler, FaVideo, FaInstagram } from 'react-icons/fa'
 
 export default function Services() {
   return (
-    <section className="bg-punk-black text-white py-16 px-6 text-center">
+    <section className="text-white py-16 px-6 text-center">
       <h2 className="text-4xl md:text-5xl font-punk mb-12 text-punk-neon">My Services</h2>
       <div className="grid gap-8 md:grid-cols-3">
         {/* DESIGN SERVICE */}

@@ -19,14 +19,7 @@ export default function About() {
   };
 
   return (
-    <section id="about" className="relative bg-black overflow-hidden py-20">
-      {/* Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-black" />
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10 mix-blend-overlay" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
-      </div>
-
+    <section id="about" className="relative overflow-hidden py-20">
       {/* Content */}
       <motion.div
         variants={containerVariants}

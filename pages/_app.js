@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import '../styles/globals.css'
-import '../styles/globals.css'
 import '../styles/scrollbar.css'
+import SmokeBackground from '../components/SmokeBackground'
 
 function MyApp({ Component, pageProps }) {
+  // Handle scroll behavior
   useEffect(() => {
     const handleScroll = () => {
       if (typeof window !== 'undefined') {
-        // Force scroll to top
         window.scrollTo({
           top: 0,
           left: 0,
@@ -37,6 +37,25 @@ function MyApp({ Component, pageProps }) {
     }
   }, [])
 
+  // Handle viewport height for mobile browsers
+  useEffect(() => {
+    const setVH = () => {
+      if (typeof window !== 'undefined') {
+        const vh = window.innerHeight * 0.01
+        document.documentElement.style.setProperty('--vh', `${vh}px`)
+      }
+    }
+
+    // Initial set
+    setVH()
+    
+    // Update on resize
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', setVH)
+      return () => window.removeEventListener('resize', setVH)
+    }
+  }, [])
+
   // Reset scroll on route changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -48,7 +67,12 @@ function MyApp({ Component, pageProps }) {
     }
   }, [Component])
 
-  return <Component {...pageProps} />
+  return (
+    <>
+      <SmokeBackground />
+      <Component {...pageProps} />
+    </>
+  )
 }
 
 export default MyApp

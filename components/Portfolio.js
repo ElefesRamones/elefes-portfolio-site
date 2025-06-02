@@ -32,9 +32,8 @@ export default function Portfolio() {
       setSelected(project)
     }
   }
-
   return (
-    <section id="portfolio" className="py-12 bg-black">
+    <section id="portfolio" className="py-12">
       <h2 className="text-5xl font-punk text-center mb-8 text-white">My Work</h2>
 
       <div className="max-w-5xl mx-auto px-4">
