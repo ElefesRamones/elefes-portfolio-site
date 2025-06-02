@@ -15,7 +15,7 @@ function Hero() {
             />
           </h1>
 
-          <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-white font-medium max-w-[90vw] sm:max-w-xl md:max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(255,255,255,0.15)]">
+          <p className="text-base xs:text-lg sm:text-xl md:text-2xl text-white font-light leading-relaxed max-w-[90vw] sm:max-w-xl md:max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(255,255,255,0.15)]">
             <span className={styles.designGlitch} data-text="Design-Man">
               Your friendly neighbourhood Design-Man
             </span>

@@ -29,10 +29,9 @@ export default function About() {
         className="relative z-10 container mx-auto px-4 lg:px-6 flex items-center justify-center"
       >
         <div className="max-w-2xl mx-auto space-y-12 text-center">
-          {/* Header */}
-          <motion.div variants={itemVariants} className="space-y-4">
+          {/* Header */}          <motion.div variants={itemVariants} className="space-y-4">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-punk text-white tracking-wider">
-              ABOUT_ME
+              ABOUT ME
             </h2>
             <div className="h-px w-full bg-gradient-to-r from-transparent via-white to-transparent opacity-20" />
           </motion.div>
