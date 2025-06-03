@@ -1,8 +1,6 @@
 import { useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import GlitchText from './GlitchText'
-import styles from './GlitchText.module.css'
 
 function Hero() {
   const controls = useAnimation()
@@ -39,21 +37,20 @@ function Hero() {
           animate={controls}
         >
           <motion.h1
-            className="text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] xl:text-[7rem] 2xl:text-[8rem] font-punk text-black mb-4 sm:mb-6 leading-[1.1] drop-shadow-[0_2px_16px_rgba(0,0,0,0.15)]"
+            className="font-punk text-black mb-4 sm:mb-6 leading-[1.1] drop-shadow-[0_2px_16px_rgba(0,0,0,0.15)]"
             animate={controls}
           >
-            <span className="block">Hello, I'm</span>
-            <GlitchText 
-              text="Ramones Capulong"
-              className="block mt-2 drop-shadow-[0_2px_16px_rgba(255,255,255,0.25)]"
-            />
+            <span className="block text-4xl xs:text-5xl sm:text-6xl">Hello, I'm</span>
+            <span className="block mt-2 text-5xl xs:text-6xl sm:text-7xl md:text-8xl drop-shadow-[0_2px_16px_rgba(255,255,255,0.25)]">
+              Ramones Capulong
+            </span>
           </motion.h1>
 
           <motion.p
-            className="text-base xs:text-lg sm:text-xl md:text-2xl text-black leading-relaxed max-w-[90vw] sm:max-w-xl md:max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.15)]"
+            className="text-lg xs:text-xl sm:text-2xl md:text-3xl text-black leading-relaxed max-w-[90vw] sm:max-w-xl md:max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.15)]"
             animate={controls}
           >
-            <span className={styles.designGlitch} data-text="Design-Man">
+            <span className="relative inline-block">
               Your friendly neighbourhood Design-Man
             </span>
           </motion.p>

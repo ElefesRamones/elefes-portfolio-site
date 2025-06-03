@@ -7,6 +7,14 @@ import { getImageUrl } from '../../utils/cloudinary'
 import LoadingState from '../../components/LoadingState'
 
 export default function ProjectPage({ initialProject }) {
+  // Set body background to black
+  useEffect(() => {
+    document.body.style.backgroundColor = '#000000'
+    return () => {
+      document.body.style.backgroundColor = ''
+    }
+  }, [])
+
   const router = useRouter()
   const [project, setProject] = useState(initialProject)
   const [imageStates, setImageStates] = useState(() => {
@@ -104,6 +112,27 @@ export default function ProjectPage({ initialProject }) {
 
   return (
     <div className="fixed inset-0 bg-black">
+      {/* Floating Home Button */}
+      <Link
+        href="/"
+        className="fixed bottom-8 right-8 z-50 p-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full transition-all duration-300 transform hover:scale-110 group"
+        aria-label="Go to homepage"
+      >
+        <svg 
+          className="w-6 h-6 text-white/75 group-hover:text-white transition-colors" 
+          fill="none" 
+          viewBox="0 0 24 24" 
+          stroke="currentColor"
+        >
+          <path 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth={2} 
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" 
+          />
+        </svg>
+      </Link>
+
       {/* Navigation Header */}
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-black">
         <Link 
@@ -137,11 +166,9 @@ export default function ProjectPage({ initialProject }) {
             <LoadingState />
           </motion.div>
         )}
-      </AnimatePresence>
-
-      {/* Main Content */}
-      <div className="h-full overflow-y-auto pt-16 relative">
-        <div className="max-w-[2000px] mx-auto">
+      </AnimatePresence>      {/* Main Content */}
+      <div className="h-full overflow-y-auto pt-16 relative project-page bg-black">
+        <div className="max-w-[2000px] mx-auto bg-black">
           {/* Project Header */}
           <div className="text-white px-6 py-12 max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-pen mb-4">{project.title}</h1>
