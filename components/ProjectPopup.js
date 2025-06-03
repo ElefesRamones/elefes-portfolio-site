@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
+import { getImageUrl, getVideoUrl } from '../utils/cloudinary'
 
 export default function ProjectPopup({ project, onClose, currentMediaIndex, setCurrentMediaIndex }) {
   const [direction, setDirection] = useState(0)
@@ -75,11 +76,37 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
     }),
   }
 
+  const renderMedia = (mediaUrl) => {
+    const isVideo = project.mediaTypes ? 
+      project.mediaTypes[currentMediaIndex] === 'video' : 
+      mediaUrl.match(/\.(mp4|webm|ogg)$/i);
+
+    if (isVideo) {
+      return (
+        <video
+          src={getVideoUrl(mediaUrl)}
+          controls
+          autoPlay
+          playsInline
+          className="w-full h-full object-contain"
+        />
+      );
+    }
+
+    return (
+      <img
+        src={getImageUrl(mediaUrl)}
+        alt={`${project.title} - Media ${currentMediaIndex + 1}`}
+        className="w-full h-full object-contain"
+      />
+    );
+  };
+
   const currentMedia = project.media[currentMediaIndex]
 
   return (
     <div
-      className="fixed inset-0 bg-white bg-opacity-80 backdrop-blur-sm z-50 flex items-center justify-center px-6"
+      className="fixed inset-0 bg-black/90 z-50 flex flex-col overflow-y-auto"
       aria-modal="true"
       role="dialog"
       tabIndex={-1}
@@ -87,76 +114,85 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
     >
       <div
         ref={popupRef}
-        className="bg-white text-black rounded-lg max-w-7xl w-full flex flex-col md:flex-row relative p-4 gap-6 outline-none shadow-xl"
+        className="w-full min-h-screen flex flex-col relative"
         onClick={e => e.stopPropagation()}
-      >        {/* Left side - description */}
-        <div className="md:w-5/12 p-4">          <h2 className="text-3xl font-pen mb-4">{project.title}</h2>
-          <p className="text-black/80">{project.description}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {project.tags?.map(tag => (
-              <span
-                key={tag}
-                className="bg-white border border-black/30 text-black px-3 py-1 rounded-full text-xs font-medium"
+      >
+        {/* Media Section */}
+        <div className="flex-1 w-full h-full flex items-center justify-center p-4 md:p-8">
+          <div className="relative w-full max-w-[90vw] mx-auto">
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.div
+                key={currentMediaIndex}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.2 }
+                }}
+                className="w-full"
               >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
+                {renderMedia(project.media[currentMediaIndex])}
+              </motion.div>
+            </AnimatePresence>
 
-        {/* Right side - media area */}
-        <div className="md:w-7/12 relative flex flex-col items-center justify-center gap-4">
-          <div className="relative flex items-center justify-center">
-            {/* Left Arrow */}
-            <button
-              onClick={() => paginate(-1)}
-              aria-label="Previous media"
-              className="z-40 bg-white text-black rounded-full p-2 hover:bg-black hover:text-white border border-black transition mr-4 focus:ring-2 focus:ring-black"
-            >
-              <FaChevronLeft />
-            </button>
-
-            {/* Media Viewer */}
-            <div className="relative w-[min(90vw,720px)] h-[min(90vw,720px)] rounded-lg border-2 border-black overflow-hidden z-30 bg-white">
-              <AnimatePresence custom={direction} mode="wait">
-                <motion.div
-                  key={currentMediaIndex}
-                  custom={direction}
-                  variants={variants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.4 }}
-                  className="w-full h-full flex items-center justify-center"
+            {project.media.length > 1 && (
+              <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-4">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    paginate(-1)
+                  }}
+                  className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                  aria-label="Previous image"
                 >
-                  {currentMedia.endsWith('.mp4') ? (
-                    <video src={currentMedia} controls className="w-full h-full object-contain" />
-                  ) : (
-                    <img src={currentMedia} alt={project.title} className="w-full h-full object-contain" loading="lazy" />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Right Arrow */}
-            <button
-              onClick={() => paginate(1)}
-              aria-label="Next media"
-              className="z-40 bg-white text-black rounded-full p-2 hover:bg-black hover:text-white border border-black transition ml-4 focus:ring-2 focus:ring-black"
-            >
-              <FaChevronRight />
-            </button>
-
-            {/* Close Button */}
-            <button
-              onClick={onClose}
-              aria-label="Close"
-              className="absolute top-2 right-2 text-black text-2xl hover:text-white hover:bg-black rounded-full transition z-50 focus:ring-2 focus:ring-black"
-            >
-              ✕
-            </button>
+                  <FaChevronLeft className="w-6 h-6" />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    paginate(1)
+                  }}
+                  className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                  aria-label="Next image"
+                >
+                  <FaChevronRight className="w-6 h-6" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Text Overlay */}
+        <div className="w-full bg-gradient-to-t from-black/90 to-transparent">
+          <div className="max-w-4xl mx-auto px-6 py-8">
+            <h2 className="text-4xl font-pen text-white mb-4">{project.title}</h2>
+            <p className="text-white/90 text-lg max-w-2xl mb-6">{project.description}</p>
+            <div className="flex flex-wrap gap-2 mb-8">
+              {project.tags?.map(tag => (
+                <span
+                  key={tag}
+                  className="bg-white/10 px-3 py-1 rounded-full text-white/80 text-sm"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="fixed top-6 right-6 p-2 text-white/80 hover:text-white transition-colors"
+          aria-label="Close modal"
+        >
+          <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
     </div>
   )

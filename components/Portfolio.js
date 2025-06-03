@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import projects from '../data/projects'
 import ProjectPopup from './ProjectPopup'
+import { getImageUrl } from '../utils/cloudinary'
 
 export default function Portfolio() {
   const [selected, setSelected] = useState(null);
@@ -52,7 +53,7 @@ export default function Portfolio() {
               onKeyDown={(e) => handleCardKeyDown(e, project)}
             >
               <img
-                src={project.thumbnail}
+                src={getImageUrl(project.thumbnail)}
                 alt={project.title}
                 loading="lazy"
                 className="w-full h-full object-cover transition duration-300 group-hover:scale-105"

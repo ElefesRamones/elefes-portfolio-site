@@ -89,7 +89,7 @@ function Hero() {
           height="24" 
           viewBox="0 0 24 24" 
           fill="none" 
-          className="text-white"
+          className="text-black"
           stroke="currentColor" 
           strokeWidth="2"
         >
