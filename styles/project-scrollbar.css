@@ -1,0 +1,23 @@
+/* Dark theme scrollbar for project pages */
+.project-page::-webkit-scrollbar {
+  width: 8px;
+}
+
+.project-page::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.project-page::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.project-page::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Firefox Support */
+.project-page {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) #000000;
+}

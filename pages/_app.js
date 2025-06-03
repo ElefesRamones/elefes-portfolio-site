@@ -1,9 +1,13 @@
 import { useEffect } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useRouter } from 'next/router'
 import '../styles/globals.css'
 import '../styles/scrollbar.css'
+import Navigation from '../components/Navigation'
 import SmokeBackground from '../components/SmokeBackground'
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter()
   // Handle scroll behavior
   useEffect(() => {
     const handleScroll = () => {
@@ -70,7 +74,18 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <SmokeBackground />
-      <Component {...pageProps} />
+      {router.pathname !== '/' && <Navigation />}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={router.pathname}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.65, 0, 0.35, 1] }}
+        >
+          <Component {...pageProps} />
+        </motion.div>
+      </AnimatePresence>
     </>
   )
 }

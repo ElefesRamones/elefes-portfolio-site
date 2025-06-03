@@ -1,17 +1,22 @@
+import Head from 'next/head'
 import Hero from '../components/Hero'
-import About from '../components/About' // ← Make sure this is added
 import Portfolio from '../components/Portfolio'
 import Services from '../components/Services'
 import Contact from '../components/Contact'
 
 export default function Home() {
   return (
-    <main>
-      <Hero />
-      <About />       {/* ← Make sure this line is here */}
-      <Portfolio />
-      <Services />
-      <Contact />
-    </main>
-  )
+    <>
+      <Head>
+        <title>Ramones Capulong | Visual Designer & Content Editor</title>
+        <meta name="description" content="Portfolio of Ramones Capulong, a passionate visual designer and content editor creating engaging digital experiences." />
+      </Head>
+      <main>
+        <Hero />
+        <Portfolio />
+        <Services />
+        <Contact />
+      </main>
+    </>
+  );
 }

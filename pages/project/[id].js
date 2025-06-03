@@ -5,6 +5,7 @@ import Link from 'next/link'
 import projects from '../../data/projects'
 import { getImageUrl } from '../../utils/cloudinary'
 import LoadingState from '../../components/LoadingState'
+import { pageTransition, fadeIn, fadeInUp } from '../../utils/animations'
 
 export default function ProjectPage({ initialProject }) {
   // Set body background to black
@@ -109,6 +110,54 @@ export default function ProjectPage({ initialProject }) {
   if (!project) return <LoadingState />
 
   const allImagesLoaded = Object.values(imageStates).every(state => !state)
+
+  const containerVariants = {
+    ...fadeIn,
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        ease: [0.65, 0, 0.35, 1],
+      }
+    }
+  }
+
+  const contentVariants = {
+    ...fadeInUp,
+    visible: {
+      ...fadeInUp.animate,
+      transition: {
+        duration: 0.5,
+        ease: [0.65, 0, 0.35, 1],
+        delay: 0.2
+      }
+    }
+  }
+
+  const mediaVariants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.65, 0, 0.35, 1],
+      }
+    },
+    exit: (direction) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.65, 0, 0.35, 1],
+      }
+    })
+  }
 
   return (
     <div className="fixed inset-0 bg-black">
