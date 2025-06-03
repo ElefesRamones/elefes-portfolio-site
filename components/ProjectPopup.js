@@ -60,19 +60,13 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
 
   const variants = {
     enter: (dir) => ({
-      x: dir > 0 ? 300 : -300,
       opacity: 0,
-      position: 'absolute',
     }),
     center: {
-      x: 0,
       opacity: 1,
-      position: 'relative',
     },
     exit: (dir) => ({
-      x: dir > 0 ? -300 : 300,
       opacity: 0,
-      position: 'absolute',
     }),
   }
 
@@ -88,7 +82,7 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
           controls
           autoPlay
           playsInline
-          className="w-full h-full object-contain"
+          className="w-full h-[80vh] object-contain bg-black"
         />
       );
     }
@@ -97,16 +91,14 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
       <img
         src={getImageUrl(mediaUrl)}
         alt={`${project.title} - Media ${currentMediaIndex + 1}`}
-        className="w-full h-full object-contain"
+        className="w-full h-[80vh] object-contain bg-black"
       />
     );
   };
 
-  const currentMedia = project.media[currentMediaIndex]
-
   return (
     <div
-      className="fixed inset-0 bg-black/90 z-50 flex flex-col overflow-y-auto"
+      className="fixed inset-0 bg-black z-50 flex flex-col"
       aria-modal="true"
       role="dialog"
       tabIndex={-1}
@@ -114,67 +106,63 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
     >
       <div
         ref={popupRef}
-        className="w-full min-h-screen flex flex-col relative"
+        className="w-full h-full relative flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Media Section */}
-        <div className="flex-1 w-full h-full flex items-center justify-center p-4 md:p-8">
-          <div className="relative w-full max-w-[90vw] mx-auto">
-            <AnimatePresence initial={false} custom={direction}>
-              <motion.div
-                key={currentMediaIndex}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30 },
-                  opacity: { duration: 0.2 }
-                }}
-                className="w-full"
-              >
-                {renderMedia(project.media[currentMediaIndex])}
-              </motion.div>
-            </AnimatePresence>
+        <div className="flex-1 w-full relative">
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={currentMediaIndex}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              {renderMedia(project.media[currentMediaIndex])}
+            </motion.div>
+          </AnimatePresence>
 
-            {project.media.length > 1 && (
-              <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-4">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    paginate(-1)
-                  }}
-                  className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-                  aria-label="Previous image"
-                >
-                  <FaChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    paginate(1)
-                  }}
-                  className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-                  aria-label="Next image"
-                >
-                  <FaChevronRight className="w-6 h-6" />
-                </button>
-              </div>
-            )}
-          </div>
+          {/* Navigation Arrows */}
+          {project.media.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  paginate(-1)
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white/75 hover:text-white transition-colors"
+                aria-label="Previous image"
+              >
+                <FaChevronLeft className="w-8 h-8" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  paginate(1)
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white/75 hover:text-white transition-colors"
+                aria-label="Next image"
+              >
+                <FaChevronRight className="w-8 h-8" />
+              </button>
+            </>
+          )}
         </div>
 
-        {/* Text Overlay */}
-        <div className="w-full bg-gradient-to-t from-black/90 to-transparent">
-          <div className="max-w-4xl mx-auto px-6 py-8">
-            <h2 className="text-4xl font-pen text-white mb-4">{project.title}</h2>
-            <p className="text-white/90 text-lg max-w-2xl mb-6">{project.description}</p>
-            <div className="flex flex-wrap gap-2 mb-8">
+        {/* Project Info */}
+        <div className="w-full bg-black p-8">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-pen text-white mb-4">{project.title}</h2>
+            <p className="text-white/75 text-lg max-w-2xl mb-6">{project.description}</p>
+            <div className="flex flex-wrap gap-2">
               {project.tags?.map(tag => (
                 <span
                   key={tag}
-                  className="bg-white/10 px-3 py-1 rounded-full text-white/80 text-sm"
+                  className="text-white/60 text-sm"
                 >
                   {tag}
                 </span>
@@ -186,7 +174,7 @@ export default function ProjectPopup({ project, onClose, currentMediaIndex, setC
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="fixed top-6 right-6 p-2 text-white/80 hover:text-white transition-colors"
+          className="fixed top-6 right-6 p-2 text-white/75 hover:text-white transition-colors"
           aria-label="Close modal"
         >
           <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">

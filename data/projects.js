@@ -10,8 +10,19 @@ const projects = [
       'logo/isda',
       'logo/isda-round',
       'logo/rc'
-    ],
-    mediaTypes: ['image', 'image', 'image']
+    ],    mediaTypes: ['image', 'image', 'image'],
+    sections: [
+      {
+        heading: "Project Overview",
+        content: "A bold and rebellious poster design that captures the raw energy of punk culture. The design incorporates distressed textures and dynamic typography to create an authentic underground aesthetic.",
+        afterImage: 0
+      },
+      {
+        heading: "Design Process",
+        content: "The creative process involved layering multiple textures and experimenting with torn paper effects. Typography was carefully selected to balance legibility with an edgy, DIY aesthetic.",
+        afterImage: 1
+      }
+    ]
   },
   {
     id: 2,
@@ -24,8 +35,19 @@ const projects = [
       'logo/rc',
       'logo/isda',
       'logo/isda-round'
-    ],
-    mediaTypes: ['image', 'image', 'image']
+    ],    mediaTypes: ['image', 'image', 'image'],
+    sections: [
+      {
+        heading: "Behind the Scenes",
+        content: "This performance reel captures the raw energy of live music through carefully timed cuts and transitions. Each moment was selected to showcase the band's unique stage presence.",
+        afterImage: 0
+      },
+      {
+        heading: "Technical Details",
+        content: "The editing process focused on synchronizing visual cuts with the music's rhythm, while color grading enhanced the atmosphere of each shot.",
+        afterImage: 1
+      }
+    ]
   },
   {
     id: 3,
@@ -33,13 +55,24 @@ const projects = [
     thumbnail: 'logo/isda-round',
     description: 'Comprehensive branded social media layout package for Instagram posts and stories, featuring a punk twist with consistent visual identity across all formats.',
     category: 'Social Media',
-    tags: ['Social', 'Branding', 'Instagram'],
-    media: [
+    tags: ['Social', 'Branding', 'Instagram'],    media: [
       'logo/isda-round',
       'logo/isda',
       'logo/rc'
     ],
-    mediaTypes: ['image', 'image', 'image']
+    mediaTypes: ['image', 'image', 'image'],
+    sections: [
+      {
+        heading: "Brand Strategy",
+        content: "This social media kit was designed to maintain brand consistency while adapting to different platform requirements. Each element was carefully crafted to stand out in crowded social feeds.",
+        afterImage: 0
+      },
+      {
+        heading: "Implementation",
+        content: "The kit includes templates for various content types, ensuring the brand's punk aesthetic translates effectively across all social media formats.",
+        afterImage: 1
+      }
+    ]
   }
 ];
 

@@ -1,0 +1,140 @@
+import { useRouter } from 'next/router'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import projects from '../../data/projects'
+import { getImageUrl } from '../../utils/cloudinary'
+import LoadingState from '../../components/LoadingState'
+
+export default function ProjectPage({ initialProject }) {
+  const router = useRouter()
+  const [imageStates, setImageStates] = useState({})
+  const [project, setProject] = useState(initialProject)
+
+  useEffect(() => {
+    if (project) {
+      const initialStates = project.media.reduce((acc, _, index) => {
+        acc[index] = true
+        return acc
+      }, {})
+      setImageStates(initialStates)
+    }
+  }, [project])
+
+  useEffect(() => {
+    if (router.query.id) {
+      const foundProject = projects.find(p => p.id === Number(router.query.id))
+      if (foundProject && foundProject.id !== project?.id) {
+        setProject(foundProject)
+      }
+    }
+  }, [router.query.id])
+
+  if (!project) return <LoadingState />
+
+  const allImagesLoaded = Object.values(imageStates).every(state => !state)
+
+  const handleImageLoad = (index) => {
+    setImageStates(prev => ({
+      ...prev,
+      [index]: false
+    }))
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black">
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center bg-black">
+        <Link 
+          href="/#portfolio"
+          className="text-white/75 hover:text-white transition-colors flex items-center gap-2 group"
+        >
+          <svg 
+            className="w-5 h-5 transform transition-transform group-hover:-translate-x-1" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Portfolio
+        </Link>
+        <div className="text-white/50 text-sm">
+          {project.category}
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {!allImagesLoaded && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-black flex items-center justify-center"
+          >
+            <LoadingState />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="h-full overflow-y-auto pt-16 relative">
+        <div className="max-w-[2000px] mx-auto">
+          <div className="text-white px-6 py-12 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-pen mb-4">{project.title}</h1>
+            <p className="text-white/75 text-lg">{project.description}</p>
+            <div className="flex flex-wrap gap-4 mt-6">
+              {project.tags?.map(tag => (
+                <span 
+                  key={tag} 
+                  className="text-white/60 text-sm border border-white/20 px-3 py-1 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {project.media.map((mediaUrl, index) => (
+            <div key={index}>
+              <div className="w-full mb-4 flex justify-center bg-black">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: !imageStates[index] ? 1 : 0 }}
+                  className="w-full"
+                >
+                  <img
+                    src={getImageUrl(mediaUrl)}
+                    alt={`${project.title} - Image ${index + 1}`}
+                    className="w-full h-auto"
+                    onLoad={() => handleImageLoad(index)}
+                  />
+                </motion.div>
+              </div>
+              
+              {project.sections?.filter(section => section.afterImage === index).map((section, sectionIndex) => (
+                <div key={sectionIndex} className="text-white px-6 py-16 max-w-3xl mx-auto">
+                  <h2 className="text-2xl font-bold mb-4">{section.heading}</h2>
+                  <p className="text-white/75 leading-relaxed">{section.content}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export async function getServerSideProps({ params }) {
+  const project = projects.find(p => p.id === Number(params.id))
+  
+  if (!project) {
+    return {
+      notFound: true
+    }
+  }
+
+  return {
+    props: {
+      initialProject: project
+    }
+  }
+}
